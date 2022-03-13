@@ -6,8 +6,6 @@ function App() {
     <>
       <div className="background-container">
         <div className="wheel" style={{ width: "40%" }}></div>
-        <section className="spikes" style={{ left: "40%" }}></section>
-
         <div className="door"></div>
       </div>
 

@@ -2,51 +2,6 @@
   display: flex;
   height: 100vh;
 }
-.spikes {
-  position: absolute;
-  width: 10%;
-  top: 0;
-  bottom: 0;
-  overflow: hidden;
-}
-
-.spikes::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  display: block;
-  background-position: 0 0;
-  transform: rotate(90deg);
-  left: -120%;
-  z-index: 0;
-  background-size: 30px 90%;
-  background-image: linear-gradient(150deg, transparent 25%, #bd0000 25%),
-    linear-gradient(210deg, transparent 30%, black 60%);
-  right: 0px;
-  /* animation-name: example;
-  animation-duration: 4s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate; */
-}
-
-@keyframes example {
-  0% {
-    background-size: 28px 90%;
-  }
-  25% {
-    background-size: 28px 90%;
-  }
-  50% {
-    background-size: 28px 85%;
-  }
-  75% {
-    background-size: 28px 80%;
-  }
-  100% {
-    background-size: 28px 85%;
-  }
-}
 
 .wheel {
   background-color: #bd0000;
