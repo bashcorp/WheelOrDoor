@@ -2,26 +2,38 @@
 
 # dependencies
 /client/node_modules
-/.pnp
-.pnp.js
+/client/package-lock.json
+/client/.pnp
+/client/.pnp.js
+
 
 # testing
-/coverage
+/client/coverage
 
 # production
-/build
+/client/build
 
 # misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+*.DS_Store
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+*npm-debug.log*
+*yarn-debug.log*
+*yarn-error.log*
 
 
 
+
+# Serverside ignore
 id_rsa_C
+
+/server/venv
+/server/*.log
+/server/*.pot
+/server/*.pyc
+*__pycache__
+/server/db.sqlite3
+/server/media
