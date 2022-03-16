@@ -1,23 +1,16 @@
 import logo from "./logo.svg";
 import "./App.css";
+import Poll from "./Poll/Poll"
+import Hero from "./Hero/Hero"
+import React, { Component } from 'react';
 
 function App() {
   return (
     <>
-      <div className="background-container">
-        <div className="wheel" style={{ width: "40%" }}></div>
-        <div className="door"></div>
-      </div>
-
-      <div className="card-wrapper">
-        <div className="card">
-          <h1>Wheel or Door?</h1>
-          <p className="lead">
-            Do you think there are more doors or wheels in the world?
-          </p>
-        </div>
-        <div></div>
-      </div>
+      <h1 class="text-7xl font-bold">
+        Hello world!
+      </h1>
+      <Poll />
     </>
   );
 }

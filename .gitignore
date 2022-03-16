@@ -37,3 +37,5 @@ id_rsa_C
 *__pycache__
 /server/db.sqlite3
 /server/media
+client/package-lock.json
+client/package-lock.json
