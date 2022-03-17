@@ -23,12 +23,20 @@ const AnimatedCharacters = (props) => {
     hidden: {
       y: "200%",
       color: "#0055FF",
-      transition: { ease: [0.455, 0.03, 0.515, 0.955], duration: 0.85 },
+      transition: {
+        ease: [0.455, 0.03, 0.515, 0.955],
+        delay: 2,
+        duration: 0.85,
+      },
     },
     visible: {
       y: 0,
       color: "#FF0088",
-      transition: { ease: [0.455, 0.03, 0.515, 0.955], duration: 0.75 },
+      transition: {
+        ease: [0.455, 0.03, 0.515, 0.955],
+        type: "tween",
+        duration: 0.75,
+      },
     },
   };
 
@@ -67,6 +75,11 @@ const AnimatedCharacters = (props) => {
                   key={index}
                 >
                   <motion.span
+                    transition={{
+                      delay: 5000,
+                      x: { type: "spring", stiffness: 100 },
+                      default: { duration: 2 },
+                    }}
                     style={{ display: "inline-block" }}
                     variants={item}
                   >

@@ -9,24 +9,27 @@
 import React, { useState } from "react";
 import { motion, useSpring } from "framer-motion";
 import AnimatedCharacters from "./AnimatedCharacters";
+import Logo from "../Logo/Logo"
 import "./Poll.css";
 
+
 function Poll() {
+
   const x = useSpring(-50, { stiffness: 100 });
   const y = useSpring("100%", { damping: 100 });
   // Placeholder text data, as if from API
   const placeholderText = [
-    { type: "heading1", text: "Framer Motion" },
     {
-      type: "heading2",
-      text: "Animating responsive text!",
-    },
+      type: "heading1",
+      text: "Do you think there are more wheels or doors in the world?",
+    }
   ];
 
   const container = {
     visible: {
       transition: {
-        staggerChildren: 0.095,
+        staggerChildren: 0.065,
+        delayChildren: 1.5
       },
     },
   };
@@ -34,11 +37,12 @@ function Poll() {
   return (
     <>
       <motion.div
+        className="font-bold"
         animate={{
-          x: -50,
+          x: 0,
           y: 0,
-          scale: [3, 4, 1, 1, 1],
-          rotate: [0, 180, 190, 180],
+          scale: [1, 1.5, .5],
+          rotate: [0, 10, 5, 10, 5, 10, 5, 10, 0, 10, 0],
         }}
         transition={{
           duration: 2,
@@ -46,21 +50,26 @@ function Poll() {
           times: [0, 0.2, 0.5, 0.8, 1],
           repeatDelay: 1,
         }}
+
         style={{
           x,
           y,
           width: 100,
-          height: 100,
+          height: 0,
           position: "fixed",
-          top: "40px",
+          top: "20px",
+          marginLeft: "auto",
+          marginRight: "auto",
+          left: -250,
+          right: 0,
         }}
-      >
-        ⌛
+      ><Logo />
       </motion.div>
+
+
       <motion.div
-        className="App"
+        className="hero-text font-bold"
         initial="hidden"
-        // animate="visible"
         animate={"visible"}
         variants={container}
       >
@@ -70,6 +79,7 @@ function Poll() {
           })}
         </div>
       </motion.div>
+      <div id="progressBar" />
     </>
   );
 }
