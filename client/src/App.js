@@ -3,6 +3,7 @@ import "./App.css";
 import Poll from "./Poll/Poll"
 import Hero from "./Hero/Hero"
 import React, { Component, useEffect, useState } from 'react';
+import PageTransition from "./PageTransition"
 
 function App() {
   const [show, setShow] = useState(true);
@@ -11,7 +12,7 @@ function App() {
     const timeId = setTimeout(() => {
       // After 3 seconds set the show value to false
       setShow(false)
-    }, 8000)
+    }, 10000)
 
     return () => {
       clearTimeout(timeId)
@@ -20,13 +21,17 @@ function App() {
 
   // If show is false the component will return null and stop here
   if (!show) {
-    return <Hero />;
+    return (<PageTransition>
+      <Hero />
+    </PageTransition>);
   }
 
   // If show is true this will be returned
   return (
     <div className="container mx-auto px-4">
-      <Poll />
+      <PageTransition>
+        <Poll />
+      </PageTransition>
     </div>
   )
 }

@@ -1,5 +1,14 @@
 * {
   font-family: "Engine";
+  overflow: visible;
+}
+
+body {
+  background-color: #820000;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%2370071c' points='1600 160 0 460 0 350 1600 50'/%3E%3Cpolygon fill='%235f0d37' points='1600 260 0 560 0 450 1600 150'/%3E%3Cpolygon fill='%234d1453' points='1600 360 0 660 0 550 1600 250'/%3E%3Cpolygon fill='%233c1a6e' points='1600 460 0 760 0 650 1600 350'/%3E%3Cpolygon fill='%232A218A' points='1600 800 0 800 0 750 1600 450'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+  /* background by SVGBackgrounds.com */
 }
 
 .background-container {
@@ -7,15 +16,74 @@
   height: 100vh;
 }
 
+.gray-theme {
+  background-color: #262626;
+}
+
+@keyframes animatedBackgroundWheel {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes animatedBackgroundDoor {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -100% -100%;
+  }
+}
+
+#animate-area {
+  width: 200px;
+  height: 200px;
+  background-image: url(http://placekitten.com/400/200);
+  background-position: 0px 0px;
+  background-repeat: repeat-x;
+}
+
 .wheel {
-  background-color: #bd0000;
+  background-color: #147cb8;
   transition-property: all;
   transition-duration: 2s;
+  z-index: 11;
+  border-right: #262626 12px solid;
+}
+
+.wheel {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: url("./img/wheel.svg");
+  background-size: 100px 100px; /* size of the image*/
+  background-color: #147cb8;
+  background-position: 0px 0px;
+  animation: animatedBackgroundWheel 60s linear infinite;
 }
 
 .door {
-  background-color: #147cb8;
+  background-color: #bd0000;
+  transition-property: all;
+  transition-duration: 2s;
   flex-grow: 1;
+}
+
+.door {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("./img/door.svg");
+  background-size: 100px 100px; /* size of the image*/
+  background-color: #bd0000;
+  background-position: 0px 0px;
+  animation: animatedBackgroundDoor 60s linear infinite;
 }
 
 #content {
@@ -35,8 +103,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  z-index: 12;
 }
 
 .card {

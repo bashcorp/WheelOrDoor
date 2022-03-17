@@ -4,7 +4,7 @@
 }
 
 .hero-text h1 {
-  font-size: 130px;
+  font-size: 115px;
   line-height: 90%;
   text-align: center;
   margin: 36px;
@@ -14,10 +14,7 @@
 
 @media screen and (max-width: 1024px) {
   .hero-text h1 {
-    font-size: 110px;
-  }
-  .hero-text h2 {
-    font-size: 100px;
+    font-size: 85px;
   }
 }
 
@@ -37,15 +34,14 @@
   height: 10px;
   position: fixed;
   z-index: 2;
-  background: #147cb8;
+  background: white;
   overflow: hidden;
-  animation: progressBar 8s ease-in-out;
+  animation: progressBar 10s ease-in-out;
   animation-iteration-count: infinite;
   animation-fill-mode: both;
-  bottom: 0;
+  top: 0;
   content: "";
   display: block;
-  left: 0;
 }
 
 @keyframes progressBar {

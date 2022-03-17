@@ -15,8 +15,8 @@ import "./Poll.css";
 
 function Poll() {
 
-  const x = useSpring(-50, { stiffness: 100 });
-  const y = useSpring("100%", { damping: 100 });
+  const x = useSpring(-150, { stiffness: 80, damping: 20 });
+  const y = useSpring(10, { stiffness: 80, damping: 20 });
   // Placeholder text data, as if from API
   const placeholderText = [
     {
@@ -41,8 +41,8 @@ function Poll() {
         animate={{
           x: 0,
           y: 0,
-          scale: [1, 1.5, .5],
-          rotate: [0, 10, 5, 10, 5, 10, 5, 10, 0, 10, 0],
+          scale: [1, 1.3, .4],
+          rotate: [0, 8, 5, 8, 5, 8, 5, 8, 5, 8, 5],
         }}
         transition={{
           duration: 2,
@@ -60,7 +60,7 @@ function Poll() {
           top: "20px",
           marginLeft: "auto",
           marginRight: "auto",
-          left: -250,
+          left: -150,
           right: 0,
         }}
       ><Logo />
