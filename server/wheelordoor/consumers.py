@@ -2,24 +2,27 @@ import asyncio
 import json
 from channels.consumer import AsyncConsumer
 
-from wod.models import Results
+from wod.models import inc_wheels, inc_doors
+from asgiref.sync import async_to_sync
 
 class WODConsumer(AsyncConsumer):
 
     async def websocket_connect(self, event):
-        print("Connected", event)
-
         await self.channel_layer.group_add("default", self.channel_name)
 
         await self.send({"type": "websocket.accept", })
 
 
     async def websocket_receive(self, event):
-        print("Receive", event)
-        if event.get('vote') == 'wheel':
-            Results.inc_wheel()
-        elif event.get('vote') == 'door':
-            Results.inc_door()
+        j = json.loads(event.get('text'))
+
+        if j.get('vote') == 'wheel':
+            print("wheel")
+            await inc_wheels()
+
+        elif j.get('vote') == 'door':
+            await inc_doors()
+        
 
 
     async def websocket_disconnect(self, event):
@@ -27,6 +30,5 @@ class WODConsumer(AsyncConsumer):
 
 
     async def update(self, event):
-        print("Update", event)
-
-        await self.send({"type": "websocket.send", "percentage": event.get("percentage")})
+        j = {"percentage": event.get("percentage")}
+        await self.send({"type": "websocket.send", "text": json.dumps(j)})
