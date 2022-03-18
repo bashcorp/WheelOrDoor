@@ -17,6 +17,16 @@ function Hero() {
     };
   });
 
+  const sendMessage = () => {
+    client.send(
+      JSON.stringify({
+        circumsized: "TRUE",
+        size: "6.25 inches",
+        image: "3==========D",
+      })
+    );
+  };
+
   return (
     <>
       <div className="inset-center">
@@ -33,7 +43,7 @@ function Hero() {
           <button
             tabIndex={0}
             className="absolute bottom-10 cursor-pointer right-0 z-10 w-full p-2 rounded-lg mx-auto max-w-sm"
-            onClick={() => alert("voted wheel")}
+            onClick={() => sendMessage()}
           >
             <div
               className="block"
@@ -58,7 +68,7 @@ function Hero() {
           <button
             tabIndex={0}
             className="absolute cursor-pointer bottom-10 left-0 p-2 z-10 rounded-lg mx-auto w-full max-w-sm"
-            onClick={() => alert("voted door")}
+            onClick={() => sendMessage()}
           >
             <div
               className="block"
