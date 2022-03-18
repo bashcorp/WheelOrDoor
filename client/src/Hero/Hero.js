@@ -1,9 +1,33 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Logo from "../Logo/Logo";
 import "./Hero.css";
+import socketIOClient from "socket.io-client";
 
-function Poll() {
-  const sectionWidth = 50;
+function Hero() {
+  const sectionWidth = 70;
+
+  let socket = socketIOClient("http://localhost:8000/socket-test");
+
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    function manageSocket() {
+      socket.emit("initial_data");
+      socket.on("get_data", getData);
+      socket.on("change_data", changeData);
+    }
+    manageSocket();
+
+    return () => {
+      socket.off("get_data", getData);
+      socket.off("change_data");
+    };
+  });
+
+  const getData = (foodItems) => {
+    console.log(foodItems);
+    setData({ food_data: foodItems });
+  };
+  const changeData = () => socket.emit("initial_data");
 
   return (
     <>
@@ -66,4 +90,4 @@ function Poll() {
     </>
   );
 }
-export default Poll;
+export default Hero;
