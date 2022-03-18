@@ -6,7 +6,7 @@ import { w3cwebsocket as W3CWebSocket } from "websocket";
 function Hero() {
   const sectionWidth = 70;
 
-  const client = new W3CWebSocket("ws://127.0.0.1:8000");
+  const client = new W3CWebSocket("ws://127.0.0.1:8000/socket-test");
 
   useEffect(() => {
     client.onopen = () => {
@@ -17,12 +17,10 @@ function Hero() {
     };
   });
 
-  const sendMessage = () => {
+  const sendMessage = (message) => {
     client.send(
       JSON.stringify({
-        circumsized: "TRUE",
-        size: "6.25 inches",
-        image: "3==========D",
+        vote: message,
       })
     );
   };
@@ -43,7 +41,7 @@ function Hero() {
           <button
             tabIndex={0}
             className="absolute bottom-10 cursor-pointer right-0 z-10 w-full p-2 rounded-lg mx-auto max-w-sm"
-            onClick={() => sendMessage()}
+            onClick={() => sendMessage("wheel")}
           >
             <div
               className="block"
@@ -68,7 +66,7 @@ function Hero() {
           <button
             tabIndex={0}
             className="absolute cursor-pointer bottom-10 left-0 p-2 z-10 rounded-lg mx-auto w-full max-w-sm"
-            onClick={() => sendMessage()}
+            onClick={() => sendMessage("door")}
           >
             <div
               className="block"
