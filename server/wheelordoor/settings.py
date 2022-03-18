@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -71,7 +72,8 @@ TEMPLATE_DIRS = [
     os.path.join(BASE_DIR, '../client/')
 ]
 
-WSGI_APPLICATION = 'wheelordoor.wsgi.application'
+ASGI_APPLICATION = 'wheelordoor.asgi.application'
+#WSGI_APPLICATION = 'wheelordoor.wsgi.application'
 
 
 # Database
