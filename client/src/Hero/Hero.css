@@ -1,7 +1,60 @@
-.inset-center {
+.hero-text {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 100;
+  top: 165px;
+}
+
+.hero-text h1 {
+  font-size: 115px;
+  line-height: 90%;
+  text-align: center;
+  margin: 36px;
+  overflow: hidden;
+  transform: rotate(-2.5deg);
+}
+
+@media screen and (max-width: 1024px) {
+  .hero-text h1 {
+    font-size: 85px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 85px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .hero-text h1 {
+    font-size: 70px;
+  }
+}
+
+#progressBar {
+  height: 10px;
+  position: fixed;
+  z-index: 2;
+  background: white;
+  overflow: hidden;
+  animation: progressBar 10s ease-in-out;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  top: 0;
+  content: "";
+  display: block;
+}
+
+@keyframes progressBar {
+  0% {
+    left: 0;
+    width: 0;
+  }
+  90% {
+    left: 0;
+    width: 100%;
+  }
+  100% {
+    left: 100%;
+    width: 0;
+  }
 }

@@ -22,7 +22,7 @@ function App() {
   // If show is false the component will return null and stop here
   if (!show) {
     return (<PageTransition>
-      <Hero />
+      <Poll />
     </PageTransition>);
   }
 
@@ -30,7 +30,7 @@ function App() {
   return (
     <div className="container mx-auto px-4">
       <PageTransition>
-        <Poll />
+        <Hero />
       </PageTransition>
     </div>
   )

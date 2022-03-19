@@ -1,87 +1,90 @@
-// import * as React from "react";
-// import { useState } from "react";
-// import { render } from "react-dom";
-// import { motion, useSpring } from "framer-motion";
-// import "./Poll.css";
-
-// export default Poll;
-
-import React, { useState } from "react";
-import { motion, useSpring } from "framer-motion";
-import AnimatedCharacters from "./AnimatedCharacters";
-import Logo from "../Logo/Logo"
+import React, { Component, useEffect, useState } from "react";
+import Logo from "../Logo/Logo";
 import "./Poll.css";
-
+import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 function Poll() {
+  const sectionWidth = 50;
 
-  const x = useSpring(-150, { stiffness: 80, damping: 20 });
-  const y = useSpring(10, { stiffness: 80, damping: 20 });
-  // Placeholder text data, as if from API
-  const placeholderText = [
-    {
-      type: "heading1",
-      text: "Do you think there are more wheels or doors in the world?",
-    }
-  ];
+  const client = new W3CWebSocket("ws://127.0.0.1:8000/socket-test");
 
-  const container = {
-    visible: {
-      transition: {
-        staggerChildren: 0.065,
-        delayChildren: 1.5
-      },
-    },
+  useEffect(() => {
+    client.onopen = () => {
+      console.log("WebSocket Client Connected");
+    };
+
+    client.onmessage = (message) => {
+      console.log(message);
+    };
+  });
+
+  const sendMessage = (message) => {
+    client.send(
+      JSON.stringify({
+        vote: message,
+      })
+    );
   };
 
   return (
     <>
-      <motion.div
-        className="font-bold"
-        animate={{
-          x: 0,
-          y: 0,
-          scale: [1, 1.3, .4],
-          rotate: [0, 8, 5, 8, 5, 8, 5, 8, 5, 8, 5],
-        }}
-        transition={{
-          duration: 2,
-          ease: "easeInOut",
-          times: [0, 0.2, 0.5, 0.8, 1],
-          repeatDelay: 1,
-        }}
+      <div className="inset-center">
+        <Logo />
+      </div>
 
-        style={{
-          x,
-          y,
-          width: 100,
-          height: 0,
-          position: "fixed",
-          top: "20px",
-          marginLeft: "auto",
-          marginRight: "auto",
-          left: -150,
-          right: 0,
-        }}
-      ><Logo />
-      </motion.div>
-
-
-      <motion.div
-        className="hero-text font-bold"
-        initial="hidden"
-        animate={"visible"}
-        variants={container}
-      >
-        <div className="container">
-          {placeholderText.map((item, index) => {
-            return <AnimatedCharacters {...item} key={index} />;
-          })}
+      <div className="background-container">
+        <div
+          className="wheel relative"
+          style={{
+            width: sectionWidth + "%",
+          }}
+        >
+          <button
+            tabIndex={0}
+            className="absolute bottom-10 cursor-pointer right-0 z-10 w-full p-2 rounded-lg mx-auto max-w-sm"
+            onClick={() => sendMessage("wheel")}
+          >
+            <div
+              className="block"
+              id="static-example"
+              role="alert"
+              aria-atomic="true"
+            >
+              <div className="gray-theme p-3 bg-clip-padding border-b border-gray-200 rounded-lg">
+                <p className="font-bold text-center text-gray-50 text-2xl">
+                  Vote for<span className="text-blue-200"> #TeamWheel</span>
+                </p>
+              </div>
+            </div>
+          </button>
         </div>
-      </motion.div>
-      <div id="progressBar" />
+        <div
+          className="door relative right-0"
+          style={{
+            width: 100 - sectionWidth + "%",
+          }}
+        >
+          <button
+            tabIndex={0}
+            className="absolute cursor-pointer bottom-10 left-0 p-2 z-10 rounded-lg mx-auto w-full max-w-sm"
+            onClick={() => sendMessage("door")}
+          >
+            <div
+              className="block"
+              id="static-example"
+              role="alert"
+              aria-atomic="true"
+            >
+              <div className="gray-theme p-3 bg-clip-padding border-b border-gray-200 rounded-lg">
+                <p className="font-bold text-center text-gray-50 text-2xl">
+                  Vote for<span className="text-red-200"> #TeamDoor </span>
+                </p>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
     </>
   );
 }
-
 export default Poll;
