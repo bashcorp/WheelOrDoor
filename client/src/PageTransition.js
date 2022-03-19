@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 const variants = {
   initial: {
     opacity: 0,
-    y: 20,
   },
   enter: {
     opacity: 1,

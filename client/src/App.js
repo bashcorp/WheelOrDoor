@@ -4,9 +4,12 @@ import Poll from "./Poll/Poll"
 import Hero from "./Hero/Hero"
 import React, { Component, useEffect, useState } from 'react';
 import PageTransition from "./PageTransition"
+import { w3cwebsocket as W3CWebSocket } from "websocket";
+
 
 function App() {
   const [show, setShow] = useState(true);
+  const client = new W3CWebSocket("ws://127.0.0.1:8000/socket-test");
 
   useEffect(() => {
     const timeId = setTimeout(() => {
@@ -22,13 +25,13 @@ function App() {
   // If show is false the component will return null and stop here
   if (!show) {
     return (<PageTransition>
-      <Poll />
+      <Poll client={client} />
     </PageTransition>);
   }
 
   // If show is true this will be returned
   return (
-    <div className="container mx-auto px-4">
+    <div style={{ minWidth: "380px" }} className="container mx-auto px-4">
       <PageTransition>
         <Hero />
       </PageTransition>

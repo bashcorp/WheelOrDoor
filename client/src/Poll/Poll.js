@@ -1,12 +1,14 @@
 import React, { Component, useEffect, useState } from "react";
 import Logo from "../Logo/Logo";
 import "./Poll.css";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
+import PollResult from "./PollResult";
+import { motion, useSpring, useAnimation } from "framer-motion";
 
-function Poll() {
-  const sectionWidth = 50;
-
-  const client = new W3CWebSocket("ws://127.0.0.1:8000/socket-test");
+function Poll(props) {
+  const client = props.client;
+  const [voted, setVoted] = useState(false);
+  const [wheelVotes, setWheelVotes] = useState(1);
+  const [doorVotes, setDoorVotes] = useState(1);
 
   useEffect(() => {
     client.onopen = () => {
@@ -14,32 +16,81 @@ function Poll() {
     };
 
     client.onmessage = (message) => {
-      console.log(message);
+      let parsedMessage = message.data;
+      let parsedMessageArray = parsedMessage.split(", ");
+      if (voted) {
+        let numWheels = parsedMessageArray[1];
+        let numDoors = parsedMessageArray[2].replace("}", "");
+
+        numDoors = numDoors.match(/: (.*)/)[1];
+        numWheels = numWheels.match(/: (.*)/)[1];
+
+        console.log(numDoors);
+        console.log(numWheels);
+
+        setWheelVotes(parseInt(numWheels));
+        setDoorVotes(parseInt(numDoors));
+      } else {
+        let numConnections = parsedMessageArray[1].replace("}", "");
+        numConnections = numConnections.match(/: (.*)/)[1];
+        console.log(numConnections);
+      }
     };
   });
 
+  const controls = useAnimation();
   const sendMessage = (message) => {
-    client.send(
-      JSON.stringify({
-        vote: message,
-      })
-    );
+    if (!voted) {
+      client.send(
+        JSON.stringify({
+          vote: message,
+        })
+      );
+    }
+    setVoted(!voted);
+
+    controls.start((i) => ({
+      opacity: 0,
+      y: 50,
+      scale: 0,
+      transition: { delay: i * 0.3 },
+      transitionEnd: {
+        display: "none",
+      },
+    }));
   };
 
   return (
     <>
-      <div className="inset-center">
+      <motion.div
+        transitionEnd={{
+          display: "none",
+        }}
+        animate={controls}
+        className="inset-center"
+      >
         <Logo />
-      </div>
+      </motion.div>
 
       <div className="background-container">
         <div
           className="wheel relative"
           style={{
-            width: sectionWidth + "%",
+            width: (wheelVotes / (wheelVotes + doorVotes)) * 100 + "%",
+            minWidth: "215px",
+            maxWidth: "calc(100vw - 215px)",
           }}
         >
-          <button
+          {voted ? (
+            <PollResult
+              percent={(wheelVotes / (wheelVotes + doorVotes)) * 100}
+              value={wheelVotes}
+              direction={"left"}
+            />
+          ) : null}
+
+          <motion.button
+            animate={controls}
             tabIndex={0}
             className="absolute bottom-10 cursor-pointer right-0 z-10 w-full p-2 rounded-lg mx-auto max-w-sm"
             onClick={() => sendMessage("wheel")}
@@ -56,16 +107,29 @@ function Poll() {
                 </p>
               </div>
             </div>
-          </button>
+          </motion.button>
         </div>
         <div
           className="door relative right-0"
           style={{
-            width: 100 - sectionWidth + "%",
+            width: (doorVotes / (wheelVotes + doorVotes)) * 100 + "%",
+            minWidth: "215px",
+            maxWidth: "calc(100vw - 215px)",
           }}
         >
-          <button
+          {voted ? (
+            <PollResult
+              percent={(doorVotes / (wheelVotes + doorVotes)) * 100}
+              value={doorVotes}
+              direction={"right"}
+            />
+          ) : null}
+          <motion.button
+            animate={controls}
             tabIndex={0}
+            transitionEnd={{
+              display: "none",
+            }}
             className="absolute cursor-pointer bottom-10 left-0 p-2 z-10 rounded-lg mx-auto w-full max-w-sm"
             onClick={() => sendMessage("door")}
           >
@@ -81,7 +145,7 @@ function Poll() {
                 </p>
               </div>
             </div>
-          </button>
+          </motion.button>
         </div>
       </div>
     </>
