@@ -33,7 +33,7 @@ class WODConsumer(AsyncConsumer):
 
 
     async def data_update(self, event):
-        j = {"type": "data", "percentage": event.get("percentage")}
+        j = {"type": "data", "wheels": event.get("wheels"), "doors": event.get("doors")}
         await self.send({"type": "websocket.send", "text": json.dumps(j)})
 
 
