@@ -25,7 +25,7 @@ SECRET_KEY = 'ms%n-k9qzhxfmn^mh+faejb8au725#ya@%c35%n*(n=lbv+qgy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['wheelordoor.com']
 
 
 # Application definition
