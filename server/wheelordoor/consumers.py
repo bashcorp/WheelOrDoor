@@ -32,6 +32,7 @@ class WODConsumer(AsyncConsumer):
 
 
     async def websocket_disconnect(self, event):
+        logger.warning("DISCONNECTING AAAH")
         await dec_conn()
         await self.channel_layer.group_discard("default", self.channel_name)
 
