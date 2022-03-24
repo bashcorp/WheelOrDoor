@@ -9,7 +9,7 @@ function PollResults(props) {
           y: 40,
           scale: [0.8, 1.2, 1],
         }}
-        className={props.direction + "-5 absolute top-1/4"}
+        className={props.direction + "-0 absolute px-3 top-1/4"}
       >
         <span
           style={{
