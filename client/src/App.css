@@ -115,6 +115,22 @@ body {
   padding: 4rem 3rem;
 }
 
+#information {
+  position: fixed;
+  right: 12px;
+  top: 12px;
+  z-index: 100;
+}
+
+#bottomBar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #262626;
+  z-index: 100;
+}
+
 @font-face {
   font-family: "Engine";
   font-style: normal;
