@@ -9,7 +9,7 @@ import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 function App() {
   const [show, setShow] = useState(true);
-  const client = new W3CWebSocket("ws://127.0.0.1:8000/socket-test");
+  const client = new W3CWebSocket("ws://www.wheelordoor.com:8001/ws/socket-test");
 
   useEffect(() => {
     const timeId = setTimeout(() => {
