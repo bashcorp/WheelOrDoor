@@ -21,26 +21,17 @@ function Poll(props) {
     client.onmessage = (message) => {
       let parsedMessage = message.data;
       console.log(parsedMessage);
-      let input = parsedMessage;
-      console.log(JSON.parse(input).connections);
+      let jsonMessage = JSON.parse(parsedMessage);
+      console.log(jsonMessage);
 
-      let parsedMessageArray = parsedMessage.split(", ");
-      if (voted) {
-        let numWheels = parsedMessageArray[1];
-        let numDoors = parsedMessageArray[2].replace("}", "");
-
-        numDoors = numDoors.match(/: (.*)/)[1];
-        numWheels = numWheels.match(/: (.*)/)[1];
-
-        console.log(numDoors);
-        console.log(numWheels);
-
-        setWheelVotes(parseInt(numWheels));
-        setDoorVotes(parseInt(numDoors));
+      if (jsonMessage.hasOwnProperty("connections")) {
+        console.log("Connections: " + jsonMessage.connections);
+        setNumConnected(jsonMessage.connections);
       } else {
-        let numConnections = parsedMessageArray[1].replace("}", "");
-        numConnections = numConnections.match(/: (.*)/)[1];
-        setNumConnected(parseInt(numConnections));
+        console.log("Wheels: " + jsonMessage.wheels);
+        console.log("Doors: " + jsonMessage.doors);
+        setWheelVotes(jsonMessage.wheels);
+        setDoorVotes(jsonMessage.doors);
       }
     };
 
