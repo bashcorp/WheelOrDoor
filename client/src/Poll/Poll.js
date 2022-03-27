@@ -21,6 +21,9 @@ function Poll(props) {
     client.onmessage = (message) => {
       let parsedMessage = message.data;
       console.log(parsedMessage);
+      let input = parsedMessage;
+      console.log(JSON.parse(input).connections);
+
       let parsedMessageArray = parsedMessage.split(", ");
       if (voted) {
         let numWheels = parsedMessageArray[1];
