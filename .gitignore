@@ -39,3 +39,9 @@ id_rsa_C
 /server/media
 client/package-lock.json
 client/package-lock.json
+
+/server/key.txt
+/server/dbpass.txt
+/server/redispass.txt
+
+/server/reload_server

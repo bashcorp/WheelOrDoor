@@ -9,7 +9,7 @@ import { w3cwebsocket as W3CWebSocket } from "websocket";
 function App() {
   const [show, setShow] = useState(true);
   const [voted, setVoted] = useState(false);
-  const client = new W3CWebSocket("ws://127.0.0.1:8000/socket-test");
+  const client = new W3CWebSocket("ws://www.wheelordoor.com/ws/socket-test");
 
   useEffect(() => {
     if (localStorage.getItem("voted") === null) {

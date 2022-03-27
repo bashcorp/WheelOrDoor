@@ -8,16 +8,16 @@ from channels.http import AsgiHandler
 from channels.routing import ProtocolTypeRouter, get_default_application, URLRouter
 from channels.security.websocket import AllowedHostsOriginValidator
 from channels.auth import AuthMiddlewareStack
-from django.urls import path
+from django.urls import path, re_path
 
 from . import consumers 
 
 
 application = ProtocolTypeRouter({
     "http": AsgiHandler(),
-    "websocket": AllowedHostsOriginValidator(AuthMiddlewareStack(
+    "websocket": AuthMiddlewareStack(
         URLRouter([
-            path('socket-test', consumers.WODConsumer().as_asgi())
+            re_path(r'^ws/socket-test$', consumers.WODConsumer().as_asgi())
         ])
-    )),
+    ),
 })
