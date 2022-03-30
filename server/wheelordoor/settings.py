@@ -152,8 +152,10 @@ STATIC_URL = '/static/'
 # Static file paths, in the client folder, separate from the server
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, '../client/build/'),
-    os.path.join(BASE_DIR, '../client/build/static/')
+    #os.path.join(BASE_DIR, '../client/build/static/')
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, '../client/build/static')
 
 
 LOGGING = {

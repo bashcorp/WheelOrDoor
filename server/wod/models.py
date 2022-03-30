@@ -60,6 +60,11 @@ def inc(wheel):
     return (r.wheels, r.doors)
 
 
+@sync_to_async
+def get_results():
+    r = getResultsObject()
+    return (r.wheels, r.doors)
+
 
 async def inc_wheels():
     (wheels, doors) = await inc(True)

@@ -2,7 +2,7 @@ import asyncio
 import json
 from channels.consumer import AsyncConsumer
 
-from wod.models import inc_wheels, inc_doors, inc_conn, dec_conn
+from wod.models import inc_wheels, inc_doors, inc_conn, dec_conn, get_results
 from asgiref.sync import async_to_sync
 
 import logging
@@ -15,6 +15,10 @@ class WODConsumer(AsyncConsumer):
         await self.channel_layer.group_add("default", self.channel_name)
 
         await self.send({"type": "websocket.accept", })
+        
+        (wheels, doors) = await get_results()
+        j = {"type": "data", "wheels": wheels, "doors": doors}
+        await self.send({"type": "websocket.send", "text": json.dumps(j)})
 
         await inc_conn()
 
