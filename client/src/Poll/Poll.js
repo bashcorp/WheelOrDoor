@@ -76,8 +76,8 @@ function Poll(props) {
           className="wheel relative"
           style={{
             width: (wheelVotes / (wheelVotes + doorVotes)) * 100 + "%",
-            minWidth: "215px",
-            maxWidth: "calc(100vw - 215px)",
+            minWidth: "110px",
+            maxWidth: "calc(100vw - 110px)",
           }}
         >
           {voted ? (
@@ -116,8 +116,8 @@ function Poll(props) {
           className="door relative right-0"
           style={{
             width: (doorVotes / (wheelVotes + doorVotes)) * 100 + "%",
-            minWidth: "215px",
-            maxWidth: "calc(100vw - 215px)",
+            minWidth: "110px",
+            maxWidth: "calc(100vw - 110px)",
           }}
         >
           {voted ? (
