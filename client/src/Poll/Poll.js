@@ -103,8 +103,8 @@ function Poll(props) {
                 role="alert"
                 aria-atomic="true"
               >
-                <div className="gray-theme p-3 bg-clip-padding border-b border-gray-200 rounded-lg">
-                  <p className="font-bold text-center text-gray-50 text-2xl">
+                <div className="gray-theme p-1 md:p-3 bg-clip-padding border-b border-gray-200 rounded-lg">
+                  <p className="font-bold text-center text-gray-50 text-lg md:text-2xl">
                     Vote for<span className="text-blue-200"> #TeamWheel</span>
                   </p>
                 </div>

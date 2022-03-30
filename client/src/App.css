@@ -1,6 +1,6 @@
 * {
   font-family: "Engine";
-  overflow: visible;
+  overflow-x: hidden;
 }
 
 body {
