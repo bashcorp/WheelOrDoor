@@ -4,7 +4,11 @@ import { motion } from "framer-motion";
 // Word wrapper
 const Wrapper = (props) => {
   // We'll do this to prevent wrapping of words using CSS
-  return <span className="word-wrapper">{props.children}</span>;
+  return (
+    <span style={{ overflow: "hidden" }} className="word-wrapper">
+      {props.children}
+    </span>
+  );
 };
 
 // Map API "type" vaules to JSX tag names
