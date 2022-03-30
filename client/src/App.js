@@ -9,10 +9,10 @@ import { w3cwebsocket as W3CWebSocket } from "websocket";
 function App() {
   const [show, setShow] = useState(true);
   const [voted, setVoted] = useState(false);
-  let client;
+  const [client, setClient] = useState();
 
   useEffect(() => {
-    client = new W3CWebSocket("wss://www.wheelordoor.com/ws/socket-test");
+    setClient(new W3CWebSocket("wss://www.wheelordoor.com/ws/socket-test"));
     if (localStorage.getItem("voted") === null) {
       const timeId = setTimeout(() => {
         setShow(false);
