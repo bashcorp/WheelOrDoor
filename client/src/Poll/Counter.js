@@ -31,7 +31,7 @@ function Counter({ to, isPercent, isFirstRender }) {
       style={{
         marginBottom: "-14px",
       }}
-      className="text-9xl block text-gray-50"
+      className="text-4xl md:text-9xl block text-gray-50"
       ref={nodeRef}
     />
   );
