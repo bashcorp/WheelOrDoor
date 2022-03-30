@@ -27,6 +27,10 @@ with open(os.path.join(BASE_DIR, 'key.txt')) as f:
 DEBUG = False
 ALLOWED_HOSTS = ['wheelordoor.com', 'www.wheelordoor.com']
 
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+
 
 # Application definition
 
@@ -83,8 +87,8 @@ with open(os.path.join(BASE_DIR, 'redispass.txt')) as f:
         "default": {
             "BACKEND": "channels_redis.core.RedisChannelLayer",
             "CONFIG": {
-                #"hosts": ["redis://:" + f.read().strip() + "@127.0.0.1:6379/0"],
-                "hosts": [("127.0.0.1", "6379")],
+                "hosts": ["redis://:" + f.read().strip() + "@127.0.0.1:6379/0"],
+                #"hosts": [("127.0.0.1", "6379")],
             },
         }
     }
