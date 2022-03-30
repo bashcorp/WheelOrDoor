@@ -15,7 +15,7 @@ function PollResults(props) {
           style={{
             marginBottom: "-14px",
           }}
-          className="text-9xl block text-gray-50"
+          className="text-4xl md:text-9xl  block text-gray-50"
         >
           {Math.floor(parseInt(props.percent))}%
         </span>
