@@ -2,10 +2,13 @@ from django.db import models
 from channels.layers import get_channel_layer
 from asgiref.sync import sync_to_async
 
+
+import logging
+logger = logging.getLogger(__name__)
+
 class Results(models.Model):
     wheels = models.IntegerField(default=0)
     doors = models.IntegerField(default=0)
-    percentage = models.FloatField(default=0)
     connections = models.IntegerField(default=0)
 
 
@@ -25,8 +28,10 @@ def change_conn(inc):
 
     if inc:
         r.connections += 1
+        logger.warning("Increasing # of connections")
     else:
         r.connections -= 1
+        logger.warning("Decreasing # of connections")
     r.save()
 
     return r.connections
@@ -54,7 +59,6 @@ def inc(wheel):
         r.wheels += 1
     else:
         r.doors += 1
-    r.percentage = r.wheels / (r.wheels + r.doors)
     r.save()
 
     return (r.wheels, r.doors)
