@@ -14,22 +14,13 @@ function Poll(props) {
   const [numConnected, setNumConnected] = useState(1);
 
   useEffect(() => {
-    client.onopen = () => {
-      console.log("WebSocket Client Connected");
-    };
-
     client.onmessage = (message) => {
       let parsedMessage = message.data;
-      console.log(parsedMessage);
       let jsonMessage = JSON.parse(parsedMessage);
-      console.log(jsonMessage);
 
       if (jsonMessage.hasOwnProperty("connections")) {
-        console.log("Connections: " + jsonMessage.connections);
         setNumConnected(jsonMessage.connections);
       } else {
-        console.log("Wheels: " + jsonMessage.wheels);
-        console.log("Doors: " + jsonMessage.doors);
         setWheelVotes(jsonMessage.wheels);
         setDoorVotes(jsonMessage.doors);
       }
