@@ -20,12 +20,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ms%n-k9qzhxfmn^mh+faejb8au725#ya@%c35%n*(n=lbv+qgy'
+with open(os.path.join(BASE_DIR, 'key.txt')) as f:
+    SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+ALLOWED_HOSTS = ['wheelordoor.com', 'www.wheelordoor.com']
 
-ALLOWED_HOSTS = []
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
 
 
 # Application definition
@@ -78,23 +82,33 @@ ASGI_APPLICATION = 'wheelordoor.asgi.application'
 
 
 
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
+with open(os.path.join(BASE_DIR, 'redispass.txt')) as f:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels_redis.core.RedisChannelLayer",
+            "CONFIG": {
+                "hosts": ["redis://:" + f.read().strip() + "@127.0.0.1:6379/0"],
+                #"hosts": [("127.0.0.1", "6379")],
+            },
+        }
     }
-}
 
 
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+with open(os.path.join(BASE_DIR, 'dbpass.txt')) as f:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'wheelordoor',
+            'USER': 'wheelordoor',
+            'PASSWORD': f.read().strip(),
+            'HOST': 'localhost',
+            'PORT': ''
+        }
     }
-}
 
 
 # Password validation
@@ -138,5 +152,32 @@ STATIC_URL = '/static/'
 # Static file paths, in the client folder, separate from the server
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, '../client/build/'),
-    os.path.join(BASE_DIR, '../client/build/static/')
+    #os.path.join(BASE_DIR, '../client/build/static/')
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, '../client/build/static')
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'django.log'),
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['file'],
+            'level': 'WARNING',
+            'propagate': True
+        },
+        'django': {
+            'handlers': ['file'],
+            'level': 'WARNING',
+            'propagate': True
+        },
+    },
+}

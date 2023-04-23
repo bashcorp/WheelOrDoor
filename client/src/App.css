@@ -1,6 +1,6 @@
 * {
   font-family: "Engine";
-  overflow: visible;
+  overflow: hidden;
 }
 
 body {
@@ -13,7 +13,8 @@ body {
 
 .background-container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
 .gray-theme {
@@ -113,6 +114,22 @@ body {
   border-radius: 12px;
   border: 1px solid rgba(209, 213, 219, 0.3);
   padding: 4rem 3rem;
+}
+
+#information {
+  position: fixed;
+  right: 12px;
+  top: 12px;
+  z-index: 100;
+}
+
+#bottomBar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #262626;
+  z-index: 100;
 }
 
 @font-face {

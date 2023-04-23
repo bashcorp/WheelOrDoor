@@ -1,10 +1,12 @@
 .hero-text {
   position: absolute;
   top: 165px;
+  left: 20%;
+  transform: translate(-10%, 0);
 }
 
 .hero-text h1 {
-  font-size: 115px;
+  font-size: 105px;
   line-height: 90%;
   text-align: center;
   margin: 36px;
@@ -14,19 +16,19 @@
 
 @media screen and (max-width: 1024px) {
   .hero-text h1 {
-    font-size: 85px;
+    font-size: 70px;
   }
 }
 
 @media screen and (max-width: 768px) {
   .hero-text h1 {
-    font-size: 85px;
+    font-size: 70px;
   }
 }
 
 @media screen and (max-width: 640px) {
   .hero-text h1 {
-    font-size: 70px;
+    font-size: 50px;
   }
 }
 
